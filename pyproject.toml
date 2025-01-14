@@ -1,0 +1,22 @@
+[project]
+name = "kittymod"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "eliseydudin", email = "dudinelisey630@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "audioop-lts>=0.2.1",
+    "discord>=2.3.2",
+    "loguru>=0.7.3",
+    "toml>=0.10.2",
+]
+
+[project.scripts]
+kittymod = "kittymod:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

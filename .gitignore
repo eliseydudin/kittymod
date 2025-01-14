@@ -1,0 +1,16 @@
+# python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+# virtual environments
+.venv
+# macos directory data
+.DS_Store
+# ide
+.vscode/
+.idea/
+# kittymod config file
+kittymod.toml
