@@ -12,5 +12,6 @@ wheels/
 # ide
 .vscode/
 .idea/
-# kittymod config file
+# kittymod 
 kittymod.toml
+kittymod.db

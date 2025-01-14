@@ -1,6 +1,6 @@
 from discord.ext import commands
 from discord import Intents
-import toml
+from kittymod.config import get_config
 import asyncio
 
 
@@ -9,14 +9,9 @@ class Bot:
         INTENTS = Intents.all()
 
         self.bot = commands.Bot("%", intents=INTENTS)
-        self._load_config()
-
-    def _load_config(self):
-        result = toml.load("kittymod.toml")
-        self.TOKEN = result["TOKEN"]
 
     def add_cog(self, cog: commands.Cog):
         asyncio.run(self.bot.add_cog(cog))
 
     def run(self):
-        self.bot.run(self.TOKEN)
+        self.bot.run(get_config()["TOKEN"])
