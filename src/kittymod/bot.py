@@ -7,7 +7,6 @@ import asyncio
 class Bot:
     def __init__(self):
         INTENTS = Intents.all()
-
         self.bot = commands.Bot("%", intents=INTENTS)
 
     def add_cog(self, cog: commands.Cog):

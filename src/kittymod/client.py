@@ -17,6 +17,9 @@ class Client(commands.Cog):
 
     @commands.command("strike")
     async def strike(self, ctx: commands.Context, id: int):
+        if not self.is_mod(ctx.author.id):
+            return
+
         try:
             user: discord.User = await ctx.bot.fetch_user(id)
             strikes = self.db.add_strikes(id)
@@ -41,20 +44,33 @@ class Client(commands.Cog):
 
     @commands.command("config")
     async def config(self, ctx: commands.Context):
+        if not self.is_mod(ctx.author.id):
+            return
+
         cfg = get_config()
-        text = f"max strikes for a user: {cfg["MAX_STRIKES"]}\n"
+        log_channel = ctx.guild.get_channel(cfg["LOG_CHANNEL"])
+        text = (
+            f"max strikes for a user: **{cfg["MAX_STRIKES"]}**\n"
+            + f"logging channel: **{log_channel.name}**\n"
+        )
 
         embed = discord.Embed(title="kittymod's config", description=text)
         await ctx.reply(embed=embed)
 
     @commands.command("ban")
     async def ban(self, ctx: commands.Context, id: int):
+        if not self.is_mod(ctx.author.id):
+            return
+
         user: discord.User = await ctx.bot.fetch_user(id)
         ctx.message.guild.ban(user)
         await ctx.reply(f"succesfully banned the user **{user.display_name}**")
 
     @commands.command("khelp")
     async def khelp(self, ctx: commands.Context):
+        if not self.is_mod(ctx.author.id):
+            return
+
         text = """
 `%sanitycheck` - check if the bot works and everything's okay
 `%config` - get the kittymod's config
@@ -64,3 +80,6 @@ class Client(commands.Cog):
 """
         embed = discord.Embed(title="help", description=text)
         await ctx.reply(embed=embed)
+
+    def is_mod(self, id: int) -> bool:
+        return list(get_config()["MODERATORS"]).count(id) != 0
