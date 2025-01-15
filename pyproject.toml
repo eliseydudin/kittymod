@@ -1,7 +1,7 @@
 [project]
 name = "kittymod"
 version = "0.1.0"
-description = "Add your description here"
+description = "a simple discord bot for moderation"
 readme = "README.md"
 authors = [
     { name = "eliseydudin", email = "dudinelisey630@gmail.com" }
