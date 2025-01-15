@@ -46,3 +46,21 @@ class Client(commands.Cog):
 
         embed = discord.Embed(title="kittymod's config", description=text)
         await ctx.reply(embed=embed)
+
+    @commands.command("ban")
+    async def ban(self, ctx: commands.Context, id: int):
+        user: discord.User = await ctx.bot.fetch_user(id)
+        ctx.message.guild.ban(user)
+        await ctx.reply(f"succesfully banned the user **{user.display_name}**")
+
+    @commands.command("khelp")
+    async def khelp(self, ctx: commands.Context):
+        text = """
+`%sanitycheck` - check if the bot works and everything's okay
+`%config` - get the kittymod's config
+`%strike <id>` - increment a user's strike count, upon reaching the max amount of strikes they get banned
+`%khelp` - see this message
+`%ban <id>` - ban a user by this id
+"""
+        embed = discord.Embed(title="help", description=text)
+        await ctx.reply(embed=embed)
